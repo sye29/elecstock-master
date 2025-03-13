@@ -8,6 +8,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { Header } from "./components/layout/Header";
 import { AppSidebar } from "./components/layout/Sidebar";
 import { useAuth } from "./context/AuthContext";
+import { SidebarProvider } from "./components/ui/sidebar";
 
 // Import pages
 import Index from "./pages/Index";
@@ -31,15 +32,17 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   }
   
   return (
-    <div className="flex h-screen overflow-hidden">
-      <AppSidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Header />
-        <main className="flex-1 overflow-auto pt-16">
-          {children}
-        </main>
+    <SidebarProvider>
+      <div className="flex h-screen overflow-hidden">
+        <AppSidebar />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Header />
+          <main className="flex-1 overflow-auto pt-16">
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </SidebarProvider>
   );
 };
 
